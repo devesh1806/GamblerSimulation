@@ -13,21 +13,28 @@ public class Gamblersimulation {
 		
 		Random var = new Random();
 		
-		int day = 0;
-		while ( day<20 ) {
-			int daily = var.nextInt(15); 
+		int[] day = new int[20];
+		int daycount = 0;
+		
+		while ( daycount < 20 ) {
+			
+			int daily = var.nextInt(15);
+			
 			for(int i=0; i< daily ; i++) {
 				if ( winprob() == 1 ) //for win
 		             everyday += everygame ;
 		        else                // for loss
 		             everyday -= everygame;
 			}
-			day++ ;
+					day[daycount]=everyday;
+			daycount++ ;
 		}
 		
-		if ( everyday < totalstake ) System.out.println("The amount lost after playing 20 days is " + (totalstake-everyday));
-		else if ( everyday > totalstake ) System.out.println("The amount won after playing 20 days is " + (everyday-totalstake));
-		else System.out.println("You have exact amount as before " + totalstake);
+		for(int i = 0 ; i < day.length ; i++ ) {
+			if ( day[i] < totalstake ) System.out.println("The amount lost on day " + (i+1) + " : " + ( totalstake - day[i] ));
+			else if ( day[i] > totalstake ) System.out.println("The amount won on day " + (i+1) + " : " + ( day[i] - totalstake ));
+			else System.out.println("The amount was not lost or won on day " + (i+1));
+		}
 	}
 	
 	public static int winprob(){
