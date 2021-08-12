@@ -1,26 +1,54 @@
 package com.gamblersimulation;
 import java.util.Random;
+import java.util.Collections;
+import java.util.Arrays;
+
 
 public class Gamblersimulation {
 	
 	public static final int totalstake = 100 ;
-	public static int[] day = new int[30];
 	public static final int bet = 1; 
 	
 	public static void main(String[] args) {
 		
 		
 		double resignstake = 0.5;
+		Integer[] dayarray = eachmonth();
 		
-		eachmonth();
-		
+		lucky(dayarray);
 		
 		
 	}
 	
-	public static void eachmonth() {
-		int daycount = 0;
+	
+	public static void lucky(Integer[] dayarray) {
+
+		for (int i=0; i<30;i++) {
+			dayarray[i]=dayarray[i]-totalstake;
+		}
+		int minimum = Collections.min(Arrays.asList(dayarray));
+		System.out.print("The Unluckiest day ");
+		printlucky(dayarray,minimum);
+        int maximum = Collections.max(Arrays.asList(dayarray));
+        System.out.print("The Luckiest day ");
+		printlucky(dayarray,maximum);
+        
+	}
+	
+	public static void printlucky(Integer[] dayarray, int x) {
 		
+		for( int i = 0 ; i < 30 ; i++) {
+        	if ( x == dayarray[i]) {
+        		System.out.print("occured on day " + (i+1) + " that is " + Math.abs(x));
+        		System.out.println();
+        		break;
+        	}
+        }
+	}
+	
+	public static Integer[] eachmonth() {
+		int daycount = 0;
+		Integer[] day = new Integer[30];
 		int everyday = totalstake ;
 				
 		Random var = new Random();
@@ -34,15 +62,10 @@ public class Gamblersimulation {
 		        else                // for loss
 		             everyday -= bet ;
 			}
-					day[daycount]=everyday;
+			day[daycount]=everyday;
 			daycount++ ;
 		}
-		
-		for(int i = 0 ; i < day.length ; i++ ) {
-			if ( day[i] < totalstake ) System.out.println("The amount lost on day " + (i+1) + " : " + ( totalstake - day[i] ));
-			else if ( day[i] > totalstake ) System.out.println("The amount won on day " + (i+1) + " : " + ( day[i] - totalstake ));
-			else System.out.println("The amount was not lost or won on day " + (i+1));
-		}
+		return day;
 	}
 	
 	public static int winprob(){
