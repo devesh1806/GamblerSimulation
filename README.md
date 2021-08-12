@@ -1,1 +1,1 @@
-<h1>Welcome to Gambler Simulator</h1>
+<h1>Welcome to Gambler Simulation Program</h1>
