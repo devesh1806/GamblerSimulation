@@ -11,21 +11,33 @@ public class Gamblersimulation {
 	
 	public static void main(String[] args) {
 		
-		
 		double resignstake = 0.5;
-		Integer[] dayarray = eachmonth();
 		
-		lucky(dayarray);
-		
+		int month = 1 ;
+		while ( true ) {
+			Integer[] dayarray = eachmonth();
+			for (int i = 0 ; i < 30 ; i++) {
+				dayarray[i]=dayarray[i]-totalstake;
+			}
+			int profit = 0;
+			for ( int i = 0 ; i < 30 ; i++) {
+				profit +=  dayarray[i];
+			}
+			if ( profit > 0 ) {
+				System.out.println("The profit for month " + month + " is " + profit);
+			}
+			else {
+				System.out.println("Stop gambling due to Loss for month " + month + " of " + profit);
+				break;
+			}
+			month++;
+		}
 		
 	}
 	
-	
+	//method for getting minimum and maximum of month.
 	public static void lucky(Integer[] dayarray) {
 
-		for (int i=0; i<30;i++) {
-			dayarray[i]=dayarray[i]-totalstake;
-		}
 		int minimum = Collections.min(Arrays.asList(dayarray));
 		System.out.print("The Unluckiest day ");
 		printlucky(dayarray,minimum);
@@ -35,6 +47,7 @@ public class Gamblersimulation {
         
 	}
 	
+	//method for printing lucky and unlucky day of month.
 	public static void printlucky(Integer[] dayarray, int x) {
 		
 		for( int i = 0 ; i < 30 ; i++) {
@@ -46,6 +59,7 @@ public class Gamblersimulation {
         }
 	}
 	
+	//method for calculating amount loss or won for month.
 	public static Integer[] eachmonth() {
 		int daycount = 0;
 		Integer[] day = new Integer[30];
@@ -68,6 +82,7 @@ public class Gamblersimulation {
 		return day;
 	}
 	
+	//method for generating probability of win or loss in bet.
 	public static int winprob(){
         int prob = (int)((Math.random()*10)%2);
         return prob;
