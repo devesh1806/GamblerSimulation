@@ -1,26 +1,33 @@
 package com.gamblersimulation;
+import java.util.Random;
 
 public class Gamblersimulation {
-public static void main(String[] args) {
+	public static final int totalstake = 100 ;
+	public static void main(String[] args) {
 		
 		//Start with 100 every day and for every game 1 condition initialised.
-		int everyday = 100 ;
+		int everyday = totalstake ;
 		int everygame = 1 ;
 		
-		int totalstake = everyday;
 		double resignstake = 0.5;
 		
-		while ( everyday > (int)(totalstake*resignstake) && everyday <= (int)(totalstake + (totalstake*resignstake))) {
-			
-			if ( winprob() == 1 ) //for win
-	             everyday += everygame ;
-	        else                // for loss
-	             everyday -= everygame;
-			
+		Random var = new Random();
+		
+		int day = 0;
+		while ( day<20 ) {
+			int daily = var.nextInt(15); 
+			for(int i=0; i< daily ; i++) {
+				if ( winprob() == 1 ) //for win
+		             everyday += everygame ;
+		        else                // for loss
+		             everyday -= everygame;
+			}
+			day++ ;
 		}
 		
-		if ( everyday == everyday*resignstake ) System.out.println("The Gambler resigned due to losing " + (int)(totalstake*resignstake));
-		else System.out.println("The Gambler resigned due to winning " + (int)(totalstake + (totalstake*resignstake)));
+		if ( everyday < totalstake ) System.out.println("The amount lost after playing 20 days is " + (totalstake-everyday));
+		else if ( everyday > totalstake ) System.out.println("The amount won after playing 20 days is " + (everyday-totalstake));
+		else System.out.println("You have exact amount as before " + totalstake);
 	}
 	
 	public static int winprob(){
