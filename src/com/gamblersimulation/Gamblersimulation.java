@@ -2,29 +2,37 @@ package com.gamblersimulation;
 import java.util.Random;
 
 public class Gamblersimulation {
+	
 	public static final int totalstake = 100 ;
+	public static int[] day = new int[30];
+	public static final int bet = 1; 
+	
 	public static void main(String[] args) {
 		
-		//Start with 100 every day and for every game 1 condition initialised.
-		int everyday = totalstake ;
-		int everygame = 1 ;
 		
 		double resignstake = 0.5;
 		
-		Random var = new Random();
+		eachmonth();
 		
-		int[] day = new int[20];
+		
+		
+	}
+	
+	public static void eachmonth() {
 		int daycount = 0;
 		
-		while ( daycount < 20 ) {
+		int everyday = totalstake ;
+				
+		Random var = new Random();
+		while ( daycount < 30 ) {
 			
 			int daily = var.nextInt(15);
 			
 			for(int i=0; i< daily ; i++) {
 				if ( winprob() == 1 ) //for win
-		             everyday += everygame ;
+		             everyday += bet ;
 		        else                // for loss
-		             everyday -= everygame;
+		             everyday -= bet ;
 			}
 					day[daycount]=everyday;
 			daycount++ ;
