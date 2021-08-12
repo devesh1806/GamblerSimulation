@@ -8,15 +8,19 @@ public static void main(String[] args) {
 		int everygame = 1 ;
 		
 		int totalstake = everyday;
+		double resignstake = 0.5;
 		
-		if ( winprob() == 1 ) //for win
-             everyday += everygame ;
-        else                // for loss
-             everyday -= everygame;
+		while ( everyday > (int)(totalstake*resignstake) && everyday <= (int)(totalstake + (totalstake*resignstake))) {
+			
+			if ( winprob() == 1 ) //for win
+	             everyday += everygame ;
+	        else                // for loss
+	             everyday -= everygame;
+			
+		}
 		
-		if (everyday>100) System.out.println("Player won bet");
-		else System.out.println("Player lost bet");
-	
+		if ( everyday == everyday*resignstake ) System.out.println("The Gambler resigned due to losing " + (int)(totalstake*resignstake));
+		else System.out.println("The Gambler resigned due to winning " + (int)(totalstake + (totalstake*resignstake)));
 	}
 	
 	public static int winprob(){
