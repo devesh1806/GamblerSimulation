@@ -42,7 +42,7 @@ public class Gamblersimulation {
 		System.out.print("The Unluckiest day ");
 		printlucky(dayarray,minimum);
 		int maximum = Collections.max(Arrays.asList(dayarray));
-        System.out.print("The Luckiest day ");
+		System.out.print("The Luckiest day ");
 		printlucky(dayarray,maximum);
         
 	}
