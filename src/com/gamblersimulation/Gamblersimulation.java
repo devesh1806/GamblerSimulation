@@ -38,9 +38,6 @@ public class Gamblersimulation {
 	//method for getting minimum and maximum of month.
 	public static void lucky(Integer[] dayarray) {
 
-		for (int i=0; i<30;i++) {
-			dayarray[i]=dayarray[i]-totalstake;
-		}
 		Integer minimum = 100000000;
 		for(int i=0;i<dayarray.length;i++) {
 			if (minimum>dayarray[i]) minimum = dayarray[i];
